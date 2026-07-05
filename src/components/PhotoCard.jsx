@@ -1,10 +1,12 @@
 import { Button, Chip } from "@heroui/react";
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 import { FaHeart } from "react-icons/fa";
 import { FaDownload } from "react-icons/fa6";
 
 const PhotoCard = ({ photo }) => {
+  console.log(photo,'photo');
   return (
     <div className="border p-2 rounded-lg">
       <div className="relative w-full aspect-square">
@@ -30,7 +32,9 @@ const PhotoCard = ({ photo }) => {
           {photo.downloads}
         </div>
       </div>
+     <Link href={`/all-photos/${photo.id}`}>
       <Button variant="ghost" className="w-full mt-2 border">view Detels</Button>
+     </Link>
     </div>
   );
 };

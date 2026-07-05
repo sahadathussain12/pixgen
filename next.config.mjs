@@ -4,7 +4,8 @@ const nextConfig = {
   reactCompiler: true,
   images:{
     remotePatterns:[
-      {
+      { 
+        
         hostname:'i.pinimg.com'
       }
     ]
