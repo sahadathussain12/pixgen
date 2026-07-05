@@ -44,13 +44,13 @@ const Navbar = () => {
             <Button className="bg-purple-400 p-2  rounded-full text-white" variant="outline">SignUp</Button>
            </Link>
 
-          <Button
-            as={Link}
-            href="/signin"
-            variant="bordered"
-          >
+          <Link href={'/signin'}>
+          <Button>
             Sign In
           </Button>
+          </Link>
+            
+       
         </div>
       </nav>
     </div>
