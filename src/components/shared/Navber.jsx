@@ -1,11 +1,18 @@
 "use client";
 
-import { Button } from "@heroui/react";
+import { Avatar, Button } from "@heroui/react";
 import Image from "next/image";
 import Link from "next/link";
-import logo from "../../../public/logo.png"
+import logo from "../../../public/logo.png";
+import { authClient } from "@/lib/auth-client";
+
 
 const Navbar = () => {
+  const userData = authClient.useSession();
+  const user = userData.data?.user;
+
+  console.log(user,);
+
   return (
     <div className="border-b px-2">
       <nav className="flex justify-between items-center py-3 max-w-7xl mx-auto w-full">
@@ -39,19 +46,38 @@ const Navbar = () => {
         </ul>
 
         {/* Auth Buttons */}
-        <div className="flex items-center  gap-3">
-           <Link href={'/signup'}>
-            <Button className="bg-purple-400 p-2  rounded-full text-white" variant="outline">SignUp</Button>
-           </Link>
+        <div className="flex items-center gap-3">
+  {!user ? (
+    <>
+      <Link href="/signup">
+        <Button variant="bordered">Sign Up</Button>
+      </Link>
 
-          <Link href={'/signin'}>
-          <Button>
-            Sign In
-          </Button>
-          </Link>
-            
-       
-        </div>
+      <Link href="/signin">
+        <Button variant="bordered">Sign In</Button>
+      </Link>
+    </>
+  ) : (
+    <>
+     <Image
+            src={user.image || "/public/user.png"}
+            alt="User"
+            width={40}
+            height={40}
+            className="rounded-full"
+          /> 
+
+      <Button
+        color="danger"
+        onPress={async () => {
+          await authClient.signOut();
+        }}
+      >
+        Logout
+      </Button>
+    </>
+  )}
+</div>
       </nav>
     </div>
   );
